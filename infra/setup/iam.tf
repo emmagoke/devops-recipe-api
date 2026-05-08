@@ -177,6 +177,8 @@ data "aws_iam_policy_document" "rds" {
       "rds:CreateDBInstance",
       "rds:DeleteDBInstance",
       "rds:ListTagsForResource",
+      "rds:AddTagsToResource",       # Added this
+      "rds:RemoveTagsFromResource",  # Added this for full lifecycle support
       "rds:ModifyDBInstance"
     ]
     resources = ["*"]
