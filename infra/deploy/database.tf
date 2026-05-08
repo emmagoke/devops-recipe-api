@@ -41,6 +41,7 @@ resource "aws_db_instance" "main" {
   instance_class             = "db.t4g.micro"
   username                   = var.db_username
   password                   = var.db_password
+  skip_final_snapshot        = true
   db_subnet_group_name       = aws_db_subnet_group.main.name
   multi_az                   = false
   backup_retention_period    = 0
