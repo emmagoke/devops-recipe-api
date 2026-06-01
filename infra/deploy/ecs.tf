@@ -181,6 +181,11 @@ resource "aws_security_group" "ecs_service" {
   }
 }
 
+# Added this to fixed the Linked role error on github action
+resource "aws_iam_service_linked_role" "ecs" {
+  aws_service_name = "ecs.amazonaws.com"
+}
+
 resource "aws_ecs_service" "api" {
   name                   = "${local.prefix}-api"
   cluster                = aws_ecs_cluster.main.name
@@ -189,6 +194,9 @@ resource "aws_ecs_service" "api" {
   launch_type            = "FARGATE"
   platform_version       = "1.4.0"
   enable_execute_command = true
+
+  # Add this to prevent race conditions
+  depends_on = [aws_iam_service_linked_role.ecs]
 
   network_configuration {
     assign_public_ip = true
