@@ -139,7 +139,7 @@ resource "aws_ecs_task_definition" "api" {
   ])
 
   volume {
-    name = "status"
+    name = "static"
   }
 
   runtime_platform {
