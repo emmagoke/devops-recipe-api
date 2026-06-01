@@ -268,7 +268,9 @@ data "aws_iam_policy_document" "iam" {
       # Add this action right here:
       "iam:CreateServiceLinkedRole",
       # Add this action right here:
-      "iam:DeleteServiceLinkedRole"
+      "iam:DeleteServiceLinkedRole",
+      # Add this final piece of the puzzle right here:
+      "iam:GetServiceLinkedRoleDeletionStatus"
     ]
     resources = ["*"]
   }
