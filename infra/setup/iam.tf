@@ -266,7 +266,9 @@ data "aws_iam_policy_document" "iam" {
       "iam:TagPolicy",
       "iam:PassRole",
       # Add this action right here:
-      "iam:CreateServiceLinkedRole"
+      "iam:CreateServiceLinkedRole",
+      # Add this action right here:
+      "iam:DeleteServiceLinkedRole"
     ]
     resources = ["*"]
   }
