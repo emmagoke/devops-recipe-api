@@ -36,14 +36,27 @@ resource "aws_lb" "api" {
   security_groups    = [aws_security_group.lb.id]
 }
 
+# The Side of the Load balancer that Distribute result
 resource "aws_lb_target_group" "api" {
-	name = "${local.prefix}-api"
-	protocol = "HTTP"
-	vpc_id = aws_vpc.main.id
-	target_type = "ip"
-	port  = 8000
+  name        = "${local.prefix}-api"
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.main.id
+  target_type = "ip"
+  port        = 8000
 
-	health_check {
-		path = "/api/health-check/"
-	}
+  health_check {
+    path = "/api/health-check/"
+  }
+}
+
+# The Listening Side of the Load Balancer
+resource "aws_lb_listener" "api" {
+  load_balancer_arn = aws_lb.api.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.api.arn
+  }
 }
