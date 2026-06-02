@@ -143,6 +143,8 @@ data "aws_iam_policy_document" "ec2" {
       "ec2:AttachInternetGateway",
       "ec2:ModifyVpcAttribute",
       "ec2:RevokeSecurityGroupIngress",
+      # Add this action right here:
+      "ec2:DescribeAccountAttributes"
     ]
     resources = ["*"]
   }
