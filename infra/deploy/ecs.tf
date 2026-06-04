@@ -232,7 +232,11 @@ resource "aws_ecs_service" "api" {
   enable_execute_command = true
 
   # Add this to prevent race conditions
-  depends_on = [aws_iam_service_linked_role.ecs]
+  depends_on = [
+    aws_iam_service_linked_role.ecs,
+    aws_efs_mount_target.media_a,
+    aws_efs_mount_target.media_b
+  ]
 
   network_configuration {
     subnets = [
